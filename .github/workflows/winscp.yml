@@ -14,10 +14,9 @@ jobs:
           
       - name: Download_files_from_SFTP
         run: |
-            choco install winscp -y
-            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-            timeout-minutes: 5
-            Get-ChildItem -Path C:\ -Include WinSCP.dll -Recurse -File -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
-
-          #Start-Process -FilePath "C:\Winscp\WinSCP-5.19.3-Setup.exe" -ArgumentList "/VERYSILENT /NORESTART" -Wait
-          #Remove-Item "WinSCP-5.19.3-Setup.exe"
+          Set-ExecutionPolicy RemoteSigned -Force
+          Set-ExecutionPolicy Unrestricted -Force
+          Install-Module SFTPCmdlets -Force
+          Import-Module SFTPCmdlets 
+          Install-Module WinSCP -Force -AllowClobber
+          Import-Module WinSCP
