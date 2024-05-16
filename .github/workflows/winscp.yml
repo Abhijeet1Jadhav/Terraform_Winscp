@@ -1,0 +1,25 @@
+name: DB_updates
+
+on: workflow_dispatch
+jobs:
+  Update_database:
+      permissions: 
+        id-token: write   # This is required for requesting the JWT
+        contents: read
+      runs-on: windows-latest 
+
+      steps:
+      - name : checking out the repository
+        uses: actions/checkout@v3
+          
+      - name: Download_files_from_SFTP
+        run: |
+          New-Item -ItemType Directory -Path D:\Winscp
+          icacls D:\Winscp /grant:r "NT AUTHORITY\NETWORK SERVICE:(OI)(CI)F"
+          Invoke-WebRequest -Uri "https://winscp.net/download/WinSCP-5.19.3-Setup.exe" -OutFile "D:\Winscp\WinSCP-5.19.3-Setup.exe"
+          cd D:\Winscp\
+          ls
+          .\WinSCP-5.19.3-Setup.exe /S /L0133 /V" /qn"
+
+          #Start-Process -FilePath "C:\Winscp\WinSCP-5.19.3-Setup.exe" -ArgumentList "/VERYSILENT /NORESTART" -Wait
+          #Remove-Item "WinSCP-5.19.3-Setup.exe"
