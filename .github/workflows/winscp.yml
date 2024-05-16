@@ -14,12 +14,7 @@ jobs:
           
       - name: Download_files_from_SFTP
         run: |
-          New-Item -ItemType Directory -Path D:\Winscp
-          icacls D:\Winscp /grant:r "NT AUTHORITY\NETWORK SERVICE:(OI)(CI)F"
-          Invoke-WebRequest -Uri "https://winscp.net/download/WinSCP-5.19.3-Setup.exe" -OutFile "D:\Winscp\WinSCP-5.19.3-Setup.exe"
-          cd D:\Winscp\
-          ls
-          .\WinSCP-5.19.3-Setup.exe /S /L0133 /V" /qn"
+            Install-Module -Name WinSCP
 
           #Start-Process -FilePath "C:\Winscp\WinSCP-5.19.3-Setup.exe" -ArgumentList "/VERYSILENT /NORESTART" -Wait
           #Remove-Item "WinSCP-5.19.3-Setup.exe"
