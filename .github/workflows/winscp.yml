@@ -15,7 +15,7 @@ jobs:
       - name: Download_files_from_SFTP
         run: |
            choco install winscp -y
-           Get-ChildIteam -Path C:\ -Include WinSCP.dll -Recurse -File -ErrorAction SilentlyContinue| Select-Object -ExpandProperty FullName
+           Get-ChildItem -Path C:\ -Include WinSCP.dll -Recurse -File -ErrorAction SilentlyContinue| Select-Object -ExpandProperty FullName
 
           #Start-Process -FilePath "C:\Winscp\WinSCP-5.19.3-Setup.exe" -ArgumentList "/VERYSILENT /NORESTART" -Wait
           #Remove-Item "WinSCP-5.19.3-Setup.exe"
